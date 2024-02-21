@@ -1,0 +1,27 @@
+/* Write your CSS here */
+.appoints-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #b5b7c4;
+  padding: 15px;
+  border-radius: 10px;
+}
+.title-star {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.title {
+  font-size: 15px;
+  color: #171f46;
+}
+.star-button {
+  background-color: transparent;
+  border-width: 0px;
+}
+.date-para {
+  font-size: 15px;
+  font-weight: 400;
+  color: #b5b7c4;
+}
