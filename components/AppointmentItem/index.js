@@ -4,7 +4,10 @@ import {format} from 'date-fns'
 
 const AppointmentItem = props => {
   const {id, name, date, isStarred} = props
-  const formatedDate = format(date, 'dd MMMM yyyy, EEEE')
+  const year = date.slice(0, 4)
+  const month = date.slice(4, 6)
+  const day = date.slice(6, 8)
+  const formatedDate = format(new Date(year, month, day), 'dd MMMM yyyy, EEEE')
   console.log(formatedDate)
   const starImg = isStarred
     ? 'https://assets.ccbp.in/frontend/react-js/appointments-app/filled-star-img.png'
