@@ -39,6 +39,22 @@ class Appointments extends Component {
     }))
   }
 
+   onClickedStarButton = id => {
+    const {appointmentsArr} = this.state
+    this.setState(prevState => ({
+      appointmentsArr: prevState.appointmentsArr.map(arr => {
+        if (arr.id === id) {
+          return {...prevState.appointmentsArr, isStarred: !arr.isStarred}
+        }
+        return arr
+      }),
+    }))
+    const starArr = appointmentsArr.filter(arr => arr.id === id)
+    this.setState(prevState => ({
+      starAppointmentsArr: [...prevState.starAppointmentsArr, starArr],
+    }))
+  }
+
   render() {
     const {nameInput, dateInput, appointmentsArr} = this.state
     return (
