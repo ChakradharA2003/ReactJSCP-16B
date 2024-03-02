@@ -12,9 +12,10 @@ const AppointmentItem = props => {
   const month = date.slice(4, 6)
   const day = date.slice(6, 8)
   */
+  console.log(props)
   console.log(isStarred)
-  const formatedDate = format(new Date(date), 'dd MMMM yyyy, EEEE')
-  console.log(formatedDate)
+  const formatDate = date ? format(new Date(date), 'dd MMMM yyyy, EEEE') : ''
+  console.log(formatDate)
   const starImg = isStarred
     ? 'https://assets.ccbp.in/frontend/react-js/appointments-app/filled-star-img.png'
     : 'https://assets.ccbp.in/frontend/react-js/appointments-app/star-img.png'
@@ -32,7 +33,7 @@ const AppointmentItem = props => {
           <img src={starImg} alt="star" className="star-image" />
         </button>
       </div>
-      <p className="date-para">Date: {formatedDate}</p>
+      <p className="date-para">Date: {formatDate}</p>
     </li>
   )
 }
