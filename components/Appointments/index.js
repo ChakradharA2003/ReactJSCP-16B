@@ -9,6 +9,7 @@ class Appointments extends Component {
     nameInput: '',
     dateInput: '',
     appointmentsArr: [],
+    starAppointmentsArr: [],
   }
 
   onChangeTitle = event => {
@@ -39,20 +40,23 @@ class Appointments extends Component {
     }))
   }
 
-   onClickedStarButton = id => {
-    const {appointmentsArr} = this.state
+  onClickedStarButton = id => {
+    // const {appointmentsArr} = this.state
     this.setState(prevState => ({
       appointmentsArr: prevState.appointmentsArr.map(arr => {
         if (arr.id === id) {
+          console.log(arr)
           return {...prevState.appointmentsArr, isStarred: !arr.isStarred}
         }
         return arr
       }),
     }))
+    /*
     const starArr = appointmentsArr.filter(arr => arr.id === id)
     this.setState(prevState => ({
       starAppointmentsArr: [...prevState.starAppointmentsArr, starArr],
     }))
+    */
   }
 
   render() {
@@ -113,6 +117,7 @@ class Appointments extends Component {
                 name={arr.name}
                 date={arr.date}
                 isStarred={arr.isStarred}
+                onClickedStarButton={this.onClickedStarButton}
               />
             ))}
           </ul>
