@@ -1,4 +1,5 @@
 // Write your code here
+// Write your code here
 import {Component} from 'react'
 import {v4 as uuidv4} from 'uuid'
 import AppointmentItem from '../AppointmentItem/index'
@@ -10,6 +11,7 @@ class Appointments extends Component {
     dateInput: '',
     appointmentsArr: [],
     starAppointmentsArr: [],
+    starred: false,
   }
 
   onChangeTitle = event => {
@@ -41,26 +43,40 @@ class Appointments extends Component {
   }
 
   onClickedStarButton = id => {
-    // const {appointmentsArr} = this.state
+    const {appointmentsArr} = this.state
     this.setState(prevState => ({
-      appointmentsArr: prevState.appointmentsArr.map(arr => {
-        if (arr.id === id) {
-          console.log(arr)
-          return {...prevState.appointmentsArr, isStarred: !arr.isStarred}
-        }
-        return arr
-      }),
+      appointmentsArr: prevState.appointmentsArr.map(appointment =>
+        appointment.id === id
+          ? {...appointment, isStarred: !appointment.isStarred}
+          : appointment,
+      ),
     }))
-    /*
     const starArr = appointmentsArr.filter(arr => arr.id === id)
     this.setState(prevState => ({
       starAppointmentsArr: [...prevState.starAppointmentsArr, starArr],
     }))
-    */
+  }
+
+  onClickedStarredButton = () => {
+    this.setState(prevState => ({
+      starred: !prevState.starred,
+    }))
   }
 
   render() {
-    const {nameInput, dateInput, appointmentsArr} = this.state
+    const {
+      nameInput,
+      dateInput,
+      appointmentsArr,
+      starAppointmentsArr,
+      starred,
+    } = this.state
+    let appointmentsList
+    if (starred === false) {
+      appointmentsList = appointmentsArr
+    } else {
+      appointmentsList = starAppointmentsArr
+    }
     return (
       <div className="bg-container">
         <div className="white-card">
@@ -86,6 +102,7 @@ class Appointments extends Component {
                 </label>
                 <input
                   type="date"
+                  id="date"
                   className="inputs"
                   value={dateInput}
                   onChange={this.onChangeDate}
@@ -105,12 +122,16 @@ class Appointments extends Component {
           <hr />
           <div className="starred-container">
             <h1 className="header">Appointments</h1>
-            <button type="button" className="starred-btn">
+            <button
+              type="button"
+              className="starred-btn"
+              onClick={this.onClickedStarredButton}
+            >
               Starred
             </button>
           </div>
           <ul className="appointments-list">
-            {appointmentsArr.map(arr => (
+            {appointmentsList.map(arr => (
               <AppointmentItem
                 key={arr.id}
                 id={arr.id}
